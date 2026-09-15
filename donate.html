@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Donate | Kundan Foundation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #faf8f3;
+      color: #202522;
+    }
+
+    .donation-page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .donation-box {
+      width: 100%;
+      max-width: 520px;
+      padding: 45px;
+      background: white;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .donation-box h1 {
+      color: #1f5c45;
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .donation-box h2 {
+      color: #1f5c45;
+      font-size: 22px;
+      margin: 20px 0 12px;
+    }
+
+    .donation-box p {
+      color: #68736c;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .amounts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .amount {
+      padding: 12px 22px;
+      border: 1px solid #1f5c45;
+      border-radius: 25px;
+      background: white;
+      color: #1f5c45;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .amount:hover,
+    .amount.active {
+      background: #1f5c45;
+      color: white;
+    }
+
+    .donate-button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 25px;
+      background: #e88b45;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .donate-button:hover {
+      background: #d97632;
+    }
+
+    .donate-button:disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .payment-details {
+      margin-top: 25px;
+      padding: 22px;
+      background: #f4f7f3;
+      border-radius: 15px;
+      text-align: left;
+    }
+
+    .payment-details p {
+      margin-bottom: 10px;
+    }
+
+    .qr-code {
+      display: block;
+      width: 220px;
+      max-width: 100%;
+      margin: 15px auto;
+    }
+
+    .notice {
+      color: #b45f06 !important;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 25px;
+      color: #1f5c45;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 520px) {
+      .donation-page {
+        padding: 15px;
+      }
+
+      .donation-box {
+        padding: 30px 20px;
+      }
+
+      .donation-box h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="donation-page">
+    <div class="donation-box">
+      <h1>Support Kundan</h1>
+
+      <p>
+        Your support can help Kundan Foundation
+        create meaningful change in communities.
+      </p>
+
+      <div class="amounts">
+        <button type="button" class="amount active">₹100</button>
+        <button type="button" class="amount">₹500</button>
+        <button type="button" class="amount">₹1,000</button>
+        <button type="button" class="amount">Custom</button>
+      </div>
+
+      <button type="button" class="donate-button" id="donateButton">
+        Show bank details and QR code →
+      </button>
+
+      <div class="payment-details" id="paymentDetails" hidden>
+        <h2>Bank details</h2>
+
+        <p>
+          <strong>Account name:</strong>
+          Kundan Foundation
+        </p>
+
+        <p>
+          <strong>Bank name:</strong>
+          YOUR BANK NAME
+        </p>
+
+        <p>
+          <strong>Account number:</strong>
+          YOUR ACCOUNT NUMBER
+        </p>
+
+        <p>
+          <strong>IFSC:</strong>
+          YOUR IFSC CODE
+        </p>
+
+        <h2>Scan to donate</h2>
+
+        <img
+          src="images/donation-qr.png"
+          alt="QR code for donating to Kundan Foundation"
+          class="qr-code"
+        />
+
+        <p class="notice">
+          Please verify the account details before making a transfer.
+        </p>
+      </div>
+
+      <a href="index.html" class="back">
+        ← Back to Home
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const amountButtons = document.querySelectorAll(".amount");
+    const donateButton = document.querySelector("#donateButton");
+    const paymentDetails = document.querySelector("#paymentDetails");
+
+    amountButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        amountButtons.forEach(item => {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+      });
+    });
+
+    donateButton.addEventListener("click", () => {
+      paymentDetails.hidden = false;
+      donateButton.textContent = "Bank details and QR code shown";
+      donateButton.disabled = true;
+    });
+  </script>
+</body>
+</html>
